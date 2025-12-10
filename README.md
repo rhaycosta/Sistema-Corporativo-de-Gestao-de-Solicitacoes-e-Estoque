@@ -1,55 +1,50 @@
-# 📊 Smart Request Tracker
+# 📊 Sistema de Gestão de Solicitações (Smart Request Tracker)
 
-> **Sistema Corporativo de Gestão de Solicitações e Estoque**
+![Power BI](https://img.shields.io/badge/Power_BI-Analytics-F2C811?logo=powerbi&logoColor=black)
+![Power Automate](https://img.shields.io/badge/Power_Automate-Automation-0066FF?logo=powerautomate&logoColor=white)
+![Excel Online](https://img.shields.io/badge/Excel_Online-Database-217346?logo=microsoft-excel&logoColor=white)
 
-![Power BI](https://img.shields.io/badge/Power_BI-Analytics-F2C811?style=for-the-badge&logo=powerbi)
-![Power Automate](https://img.shields.io/badge/Power_Automate-Automation-0066FF?style=for-the-badge&logo=powerautomate)
-![Microsoft Forms](https://img.shields.io/badge/Microsoft_Forms-Input-008080?style=for-the-badge&logo=microsoft)
+## 📋 Sobre o Projeto
 
-## 💡 Sobre o Projeto
+Este projeto consiste em uma solução corporativa de **Business Intelligence (BI)** e **RPA (Robotic Process Automation)** para o gerenciamento de solicitações de materiais. O objetivo principal foi eliminar processos manuais e descentralizados, criando um fluxo automatizado de ponta a ponta.
 
-Este projeto é uma solução *end-to-end* de Business Intelligence e Automação de Processos (RPA) desenvolvida para gerenciar o fluxo de solicitação de materiais e urgências em um ambiente corporativo. 
+A aplicação permite que colaboradores façam solicitações via formulário, notifica automaticamente os gestores e fornece um dashboard interativo para análise de SLAs e níveis de estoque em tempo real.
 
-O sistema elimina o uso de planilhas manuais descentralizadas, centralizando o input de dados, automatizando a comunicação entre solicitante e gestor, e oferecendo uma visão analítica em tempo real.
+## ⚙️ Funcionalidades
 
-## 🏛️ Arquitetura da Solução
-
-O projeto segue o fluxo de dados "Input -> Process -> Output":
-
-1.  **Entrada (Input):** O usuário preenche um formulário via **Microsoft Forms** (integrado via link/botão no dashboard).
-2.  **Armazenamento:** Os dados são salvos automaticamente em uma **Lista do SharePoint** (ou Excel Online for Business).
-3.  **Automação (Backend):**
-    * *Fluxo 1:* Notifica o gestor por e-mail sobre novas demandas (SLA de atendimento).
-    * *Fluxo 2:* Monitora a mudança de status. Quando o pedido é "Finalizado", o solicitante recebe um e-mail automático de confirmação.
-4.  **Visualização (Frontend):** **Power BI** consome os dados para gerar indicadores de performance e controle de estoque.
+- **Entrada de Dados Centralizada:** Coleta de pedidos padronizada via Microsoft Forms.
+- **Automação de Notificações:** Envio automático de e-mails para aprovação (Gestor) e confirmação de conclusão (Solicitante).
+- **Banco de Dados em Nuvem:** Armazenamento seguro e estruturado utilizando Excel Online (OneDrive for Business).
+- **Dashboard Executivo:** Painel no Power BI com indicadores de urgência, volume de pedidos e status de atendimento.
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Power BI:** Dashboard interativo com design "Dark Mode" corporativo.
-* **Power Automate:** Fluxos de nuvem para gatilhos de e-mail e atualização de dados.
-* **Microsoft Forms:** Interface de coleta de dados amigável.
-* **SharePoint Online:** Banco de dados transacional.
+* **Microsoft Power BI:** Para visualização de dados e *storytelling*.
+* **Microsoft Power Automate:** Para criação dos fluxos de nuvem automatizados (*Automated Cloud Flows*).
+* **Microsoft Forms:** Interface de *front-end* para o usuário final.
+* **Excel Online / OneDrive:** Como repositório de dados (*Backend*).
 
-## 🎨 Funcionalidades do Dashboard
+## 🏗️ Arquitetura da Solução
 
-O painel foi desenhado com foco em UX (User Experience) corporativa:
+O fluxo de trabalho foi desenhado para ser acionado por eventos (*Event-driven*):
 
-* **KPIs em Tempo Real:** Total de solicitações, pendências e % de urgência alta.
-* **Write-back Indireto:** Botão estilizado para realizar novas solicitações sem sair do ambiente de análise.
-* **Análise de SLA:** Tempo médio entre solicitação e finalização.
-* **Alertas Visuais:** Formatação condicional para itens críticos e urgentes.
+1.  **Gatilho:** O usuário envia uma nova resposta no Forms.
+2.  **Processamento:** O Power Automate captura os dados e insere uma nova linha na tabela do Excel.
+3.  **Ação:** Um e-mail com os detalhes do pedido é enviado ao responsável.
+4.  **Atualização:** Quando o status no Excel é alterado para "Finalizado", um segundo fluxo notifica o solicitante.
 
-## 🚀 Como Reproduzir
+### Visualização do Fluxo
+![Fluxo de Recebimento no Power Automate](fluxo_recebimento.png)
+
+## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
-* Conta Microsoft 365 (Business ou Enterprise).
-* Power BI Desktop.
+* Licença Microsoft 365 (E3, E5 ou Business).
+* Power BI Desktop instalado.
 
-### Passo a Passo
-1.  **Banco de Dados:** Crie uma Lista no SharePoint com colunas para *Material, Quantidade, Urgência, Status, E-mail Solicitante*.
-2.  **Forms:** Crie um formulário espelhando as colunas de entrada.
-3.  **Fluxos:** Importe os fluxos do Power Automate (descritos na pasta `/docs` deste repo) conectando o Forms à Lista e ao Outlook.
-4.  **Dashboard:**
-    * Abra o arquivo `.pbix`.
-    * Vá em "Transformar Dados" e altere a fonte para a sua Lista do SharePoint.
-    * Atualize o link do botão "Nova Solicitação" para o seu Microsoft Form.
+### Configuração
+1.  **Base de Dados:** Clone a estrutura da tabela no Excel Online (Colunas: *ID, Material, Quantidade, Urgência, Status, Email*).
+2.  **Automação:** Importe os fluxos para o seu ambiente do Power Automate e reconecte com sua conta do OneDrive.
+3.  **Dashboard:** Abra o arquivo `.pbix`, vá em *Transformar Dados* e aponte para o caminho do seu arquivo Excel no OneDrive.
+
+---
