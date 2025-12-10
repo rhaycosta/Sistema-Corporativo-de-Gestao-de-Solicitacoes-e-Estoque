@@ -9,7 +9,7 @@ Uma solução corporativa para automatizar o recebimento, aprovação e análise
 
 O processo é 100% automatizado via **Power Automate**. Abaixo está o desenho técnico da automação:
 
-[Fluxo de Automação no Power Automate](fluxo_automacao)
+![Fluxo de Automação no Power Automate](fluxo_recebimento.png)
 
 ---
 
@@ -44,5 +44,5 @@ O processo é 100% automatizado via **Power Automate**. Abaixo está o desenho t
 ---
 
 <div align="center">
-    <sub>Projeto desenvolvido para otimização de processos administrativos.</sub>
+    <sub>Projeto ainda está em desenvolvimento. 10/12/2025.</sub>
 </div>
